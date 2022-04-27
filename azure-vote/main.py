@@ -32,13 +32,13 @@ view_manager = stats.view_manager
     #exporter =  TODO: Setup exporter
 exporter = metrics_exporter.new_metrics_exporter(
 enable_standard_metrics=True,
-connection_string='InstrumentationKey=f3dc666f-2340-42f8-86cd-9caa902a8635')
+connection_string='InstrumentationKey=f3dc666f-2340-42f8-86cd-9caa902a8635;IngestionEndpoint=https://australiaeast-1.in.applicationinsights.azure.com/;LiveEndpoint=https://australiaeast.livediagnostics.monitor.azure.com/')
 view_manager.register_exporter(exporter)
 
 # Tracing
 tracer = Tracer(
  exporter=AzureExporter(
-     connection_string='InstrumentationKey=f3dc666f-2340-42f8-86cd-9caa902a8635'),
+     connection_string='InstrumentationKey=f3dc666f-2340-42f8-86cd-9caa902a8635;IngestionEndpoint=https://australiaeast-1.in.applicationinsights.azure.com/;LiveEndpoint=https://australiaeast.livediagnostics.monitor.azure.com/'),
  sampler=ProbabilitySampler(1.0),
 )
 app = Flask(__name__)
@@ -46,7 +46,7 @@ app = Flask(__name__)
 # Requests # TODO: Setup flask middleware
 middleware = FlaskMiddleware(
  app,
- exporter=AzureExporter(connection_string="InstrumentationKey=f3dc666f-2340-42f8-86cd-9caa902a8635"),
+ exporter=AzureExporter(connection_string="InstrumentationKey=f3dc666f-2340-42f8-86cd-9caa902a8635;IngestionEndpoint=https://australiaeast-1.in.applicationinsights.azure.com/;LiveEndpoint=https://australiaeast.livediagnostics.monitor.azure.com/"),
  sampler=ProbabilitySampler(rate=1.0)
 )
 
@@ -94,7 +94,7 @@ def index():
 
         vote2 = r.get(button2).decode('utf-8')
         # TODO: use tracer object to trace dog vote
-        logger.info('Dogs Vote GET')
+        logger.info('Cats Vote GET')
         with tracer.span(name="Dogs Vote") as span:
          print("Dogs Vote")
 
