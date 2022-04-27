@@ -27,10 +27,10 @@ from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 config_integration.trace_integrations(['logging'])
 config_integration.trace_integrations(['requests'])
 logger = logging.getLogger(__name__)# TODO: Setup logger
-handler = AzureLogHandler(connection_string='InstrumentationKey=[your-guid]')
+handler = AzureLogHandler(connection_string='InstrumentationKey=f3dc666f-2340-42f8-86cd-9caa902a8635')
 handler.setFormatter(logging.Formatter('%(traceId)s %(spanId)s %(message)s'))
 logger.addHandler(handler)
-logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=[your-guid]'))
+logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=f3dc666f-2340-42f8-86cd-9caa902a8635'))
 logger.setLevel(logging.INFO)
 
 # Metrics
