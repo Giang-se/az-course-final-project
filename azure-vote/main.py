@@ -24,7 +24,14 @@ from opencensus.trace.tracer import Tracer
 from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 
 # Logging
+config_integration.trace_integrations(['logging'])
+config_integration.trace_integrations(['requests'])
 logger = logging.getLogger(__name__)# TODO: Setup logger
+handler = AzureLogHandler(connection_string='InstrumentationKey=[your-guid]')
+handler.setFormatter(logging.Formatter('%(traceId)s %(spanId)s %(message)s'))
+logger.addHandler(handler)
+logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=[your-guid]'))
+logger.setLevel(logging.INFO)
 
 # Metrics
 stats = stats_module.stats
