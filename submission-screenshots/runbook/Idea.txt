@@ -1,0 +1,1 @@
+Let say I have a blob named "Images" contains my images. I created a runbook to delete an images if it has size > 10000
